@@ -10,6 +10,7 @@ class ArticlesController < ApplicationController
   def show
   end
 
+
   # GET /articles/new
   def new
     @article = Article.new
@@ -22,23 +23,21 @@ class ArticlesController < ApplicationController
   # POST /articles
   def create
     @article = Article.new(article_params)
-
     if @article.save!
-    redirect_to @article, notice: "Article was successfully created."
+      redirect_to @article, notice: "Article was successfully created."
     else
-    render :new,status: :unprocessable_entity
+      render :new,status: :unprocessable_entity
     end
   end
 
 
   # PATCH/PUT /articles/1
   def update
-      # binding.pry
-      if @article.update(article_params)
+    if @article.update(article_params)
       redirect_to @article, notice: "Article was successfully updated."
-      else
+    else
       render :edit, status: :unprocessable_entity
-      end
+    end
   end
 
   # DELETE /articles/1
@@ -48,13 +47,13 @@ class ArticlesController < ApplicationController
   end
 
    private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_article
-      @article = Article.find(params[:id])
-    end
-
-    # Only allow a list of trusted parameters through.
-    def article_params
-      params.require(:article).permit(:title, :content)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_article
+    @article = Article.find(params[:id])
   end
+
+  # Only allow a list of trusted parameters through.
+  def article_params
+    params.require(:article).permit(:title, :content)
+  end
+end
