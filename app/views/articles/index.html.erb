@@ -20,13 +20,10 @@
         <td><%= article.content %></td>
         <td>
          <%= link_to '詳細', article, class: "btn btn-success" %>
-         <%= link_to '編集', edit_article_path(article),class: "btn btn-warning" %>
-         <%= link_to '削除', article,class: "btn btn-danger", method: :delete, data: { confirm: '削除しますか?' } %>
-         </td>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-<%= link_to "最終確認用ボタン", "#", class: "btn btn-primary" %>
