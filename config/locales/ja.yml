@@ -5,3 +5,10 @@ ja:
   attributes:
     title: タイトル
     content: 内容
+  views:
+    pagination:
+      first: "&laquo; 最初"
+      last: "最後 "
+      previous: "前"
+      next: "次 "
+      truncate: "..."
