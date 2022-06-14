@@ -1,15 +1,14 @@
 class ArticlesController < ApplicationController
-  skip_before_action :authenticate_user!,only: %i[ index show ]
-  before_action :set_article, only: %i[ edit update destroy ]
+  before_action :set_article, only: %i[ show edit update destroy ]
 
   # GET /articles
   def index
-    @articles = Article.all
+    @articles = Article.all.page params[:page]
   end
 
   # GET /articles/1
   def show
-    @article = Article.find(params[:id])
+     @articles = current_user.articles.page params[:page]
   end
 
 
@@ -24,7 +23,7 @@ class ArticlesController < ApplicationController
 
   # POST /articles
   def create
-    @article = current_user.articles.new(article_params)
+    @article = Article.new(article_params)
     if @article.save
       redirect_to @article, notice: "記事が作成されました。"
     else
@@ -48,10 +47,10 @@ class ArticlesController < ApplicationController
     redirect_to articles_url, notice: "記事が削除されました。"
   end
 
-  private
+   private
   # Use callbacks to share common setup or constraints between actions.
   def set_article
-    @article = current_user.articles.find(params[:id])
+    @article = Article.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.
