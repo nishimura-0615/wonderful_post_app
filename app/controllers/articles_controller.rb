@@ -4,9 +4,10 @@ class ArticlesController < ApplicationController
 
   # GET /articles
   def index
-    @articles = Article.all.page params[:page]
+    articles = Article.all
+    articles = articles.where("title LIKE ?", "%#{params[:title]}%") if params[:title].present?
+    @articles = articles.all.page params[:page]
   end
-
   # GET /articles/1
   def show
     @article = Article.find(params[:id])
