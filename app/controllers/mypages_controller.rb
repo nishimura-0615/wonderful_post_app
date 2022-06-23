@@ -4,4 +4,5 @@ class MypagesController < ApplicationController
     articles = articles.where(["title LIKE ?","%#{params[:title]}%"]) ,if "%#{params[:title]}%".present?
     @articles = articles.page params[:page]
   end
+ end
 end
