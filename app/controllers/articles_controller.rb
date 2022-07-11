@@ -4,7 +4,7 @@ class ArticlesController < ApplicationController
 
   # GET /articles
   def index
-    articles = Article.all
+    articles = Article.all.includes(:tags)
     articles = articles.where("title LIKE ?", "%#{params[:title]}%") if params[:title].present?
     @articles = articles.all.page params[:page]
   end
